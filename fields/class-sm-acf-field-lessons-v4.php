@@ -29,7 +29,7 @@ class sm_acf_field_lessons extends acf_field {
 		// vars
 		$this->name = 'lessons';
 		$this->label = __('Bible Lesson', 'acf-sm-lesson');
-		$this->category = __("Choice",'saibamais', 'acf-sm-lesson'); // Basic, Content, Choice, etc
+		$this->category = __("Choice", 'acf-sm-lesson'); // Basic, Content, Choice, etc
 		$this->defaults = array(
 			// add default here to merge into your field. 
 			// This makes life easy when creating the field options as you don't need to use any if( isset('') ) logic. eg:

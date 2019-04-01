@@ -108,7 +108,7 @@ class sm_acf_field_lessons extends acf_field {
 		
 		acf_render_field_setting( $field, array(
 			'label'			=> __('Source bible lessons list','acf-sm-lesson'),
-			'instructions'	=> __('Select bible lesson source','acf-sm-lesson'),
+			'instructions'	=> __('Data source from which the list of studies will come','acf-sm-lesson'),
 			'type'			=> 'select',
 			'name'			=> 'acf_sm_lesson__source',
 			'choices'		=> array(

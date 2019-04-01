@@ -74,7 +74,7 @@ class sm_acf_plugin_lessons {
 		
 		
 		// load textdomain
-		load_plugin_textdomain( 'saibamais', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' ); 
+		load_plugin_textdomain( 'acf-sm-lesson', false, plugin_basename( dirname( __FILE__ ) ) . '/lang' ); 
 		
 		
 		// include
