@@ -1,5 +1,3 @@
-# ACF FIELD_LABEL Field
+# ACF LESSONS Field
 
-Welcome to the Advanced Custom Fields FIELD_LABEL repository on Github.
-
-EXTENDED_DESCRIPTION
+Welcome to the Advanced Custom Fields Estudos Bíblicos Saiba Mais repository on Github.
