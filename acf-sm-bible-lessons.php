@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: ACF: Estudo Bíblico Saiba Mais
-Plugin URI: https://github.com/saiba-mais/acf-sm-lessons
+Plugin URI: https://github.com/saiba-mais/acf-sm-bible-lessons
 Description: Acrescenta um campo com a lista de Estudos Bíblicos Saiba Mais
 Version: 1.0.0
 Author: Rodrigo Palheiro
