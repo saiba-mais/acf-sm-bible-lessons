@@ -37,14 +37,14 @@ class sm_acf_field_lessons extends acf_field {
 		*  label (string) Multiple words, can include spaces, visible when selecting a field type
 		*/
 		
-		$this->label = __('Estudo Bíblico Saiba Mais', 'saibamais');
+		$this->label = __('Bible Lesson', 'acf-sm-lesson');
 		
 		
 		/*
 		*  category (string) basic | content | choice | relational | jquery | layout | CUSTOM GROUP NAME
 		*/
 		
-		$this->category = 'basic';
+		$this->category = 'choice';
 		
 		
 		/*
@@ -52,7 +52,9 @@ class sm_acf_field_lessons extends acf_field {
 		*/
 		
 		$this->defaults = array(
-			'font_size'	=> 14,
+			'acf_sm_lesson__source'	=> 'https://saiba-mais.github.io/bible-lessons/catalog.json',
+			'acf_sm_lesson__lang'	=> 'pt'
+
 		);
 		
 		
@@ -62,7 +64,7 @@ class sm_acf_field_lessons extends acf_field {
 		*/
 		
 		$this->l10n = array(
-			'error'	=> __('Error! Please enter a higher value', 'saibamais'),
+			'error'	=> __('Error! Please enter a higher value', 'acf-sm-lesson'),
 		);
 		
 		
@@ -105,11 +107,25 @@ class sm_acf_field_lessons extends acf_field {
 		*/
 		
 		acf_render_field_setting( $field, array(
-			'label'			=> __('Font Size','saibamais'),
-			'instructions'	=> __('Customise the input font size','saibamais'),
-			'type'			=> 'number',
-			'name'			=> 'font_size',
-			'prepend'		=> 'px',
+			'label'			=> __('Source bible lessons list','acf-sm-lesson'),
+			'instructions'	=> __('Select bible lesson source','acf-sm-lesson'),
+			'type'			=> 'select',
+			'name'			=> 'acf_sm_lesson__source',
+			'choices'		=> array(
+				'https://saiba-mais.github.io/bible-lessons/catalog.json'	=> 'Github - https://saiba-mais.github.io/bible-lessons/catalog.json',
+				'local'		=> 'Wordpress'
+			)
+		));
+
+		acf_render_field_setting( $field, array(
+			'label'			=> __('Language','acf-sm-lesson'),
+			'instructions'	=> __('Select language from the list','acf-sm-lesson'),
+			'type'			=> 'select',
+			'name'			=> 'acf_sm_lesson__lang',
+			'choices'		=> array(
+				'pt'		=> __('Portuguese (pt-br)','acf-sm-lesson'),
+				'en'		=> __('English (en-us)','acf-sm-lesson'),
+			)
 		));
 
 	}
@@ -133,24 +149,45 @@ class sm_acf_field_lessons extends acf_field {
 	
 	function render_field( $field ) {
 		
-		
 		/*
 		*  Review the data of $field.
 		*  This will show what data is available
 		*/
-		
-		echo '<pre>';
-			print_r( $field );
-		echo '</pre>';
-		
+
+		$list = json_decode( file_get_contents($field['acf_sm_lesson__source']), true);
+		$lang = $field['acf_sm_lesson__lang'];
+
 		
 		/*
-		*  Create a simple text input using the 'font_size' setting.
+		*  Create a select input getting dynamic 'source' from the Github or localy Wordpress "lesson" post type.
 		*/
-		
-		?>
-		<input type="text" name="<?php echo esc_attr($field['name']) ?>" value="<?php echo esc_attr($field['value']) ?>" style="font-size:<?php echo $field['font_size'] ?>px;" />
-		<?php
+		if( !empty( $list[$lang] ) ) {
+
+			echo '<select name="' . esc_attr( $field['name'] ) . '">';
+
+			foreach( $list[$lang] as $value => $label ) {	
+
+				$option_value = 'https://github.com/saiba-mais/bible-lessons/pt/' . $value . '.json';
+				$option_label = $label; 
+				if ( isset( $value ) ) {
+                    $selected = ( $option_value === $field['value'] ) ? " selected=\"selected\"" : false;
+                } else {
+                    $selected = false;
+                }
+                
+                ?>
+
+				<option value="<?php echo esc_attr( $option_value ); ?>" <?php echo $selected; ?>>
+					<?php echo esc_html( $option_label ); ?>
+				</option>
+
+			<?php 
+			}
+
+			echo '</select>';
+
+		}
+
 	}
 	
 		
@@ -178,13 +215,13 @@ class sm_acf_field_lessons extends acf_field {
 		
 		
 		// register & include JS
-		wp_register_script('saibamais', "{$url}assets/js/input.js", array('acf-input'), $version);
-		wp_enqueue_script('saibamais');
+		wp_register_script('acf-sm-lesson', "{$url}assets/js/input.js", array('acf-input'), $version);
+		wp_enqueue_script('acf-sm-lesson');
 		
 		
 		// register & include CSS
-		wp_register_style('saibamais', "{$url}assets/css/input.css", array('acf-input'), $version);
-		wp_enqueue_style('saibamais');
+		wp_register_style('acf-sm-lesson', "{$url}assets/css/input.css", array('acf-input'), $version);
+		wp_enqueue_style('acf-sm-lesson');
 		
 	}
 	
@@ -443,7 +480,7 @@ class sm_acf_field_lessons extends acf_field {
 		// Advanced usage
 		if( $value < $field['custom_minimum_setting'] )
 		{
-			$valid = __('The value is too little!','saibamais'),
+			$valid = __('The value is too little!','acf-sm-lesson'),
 		}
 		
 		

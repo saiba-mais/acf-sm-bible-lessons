@@ -28,12 +28,13 @@ class sm_acf_field_lessons extends acf_field {
 	{
 		// vars
 		$this->name = 'lessons';
-		$this->label = __('Estudo Bíblico Saiba Mais');
-		$this->category = __("Basic",'saibamais'); // Basic, Content, Choice, etc
+		$this->label = __('Bible Lesson', 'acf-sm-lesson');
+		$this->category = __("Choice",'saibamais', 'acf-sm-lesson'); // Basic, Content, Choice, etc
 		$this->defaults = array(
 			// add default here to merge into your field. 
 			// This makes life easy when creating the field options as you don't need to use any if( isset('') ) logic. eg:
-			//'preview_size' => 'thumbnail'
+			'acf_sm_lesson__source'	=> 'https://saiba-mais.github.io/bible-lessons/catalog.json',
+			'acf_sm_lesson__lang'	=> 'pt'
 		);
 		
 		
@@ -63,9 +64,8 @@ class sm_acf_field_lessons extends acf_field {
 	function create_options( $field )
 	{
 		// defaults?
-		/*
 		$field = array_merge($this->defaults, $field);
-		*/
+		
 		
 		// key is needed in the field names to correctly save the data
 		$key = $field['name'];
