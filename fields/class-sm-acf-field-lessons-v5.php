@@ -163,7 +163,7 @@ class sm_acf_field_lessons extends acf_field {
 		*/
 		if( !empty( $list[$lang] ) ) {
 
-			echo '<select name="' . esc_attr( $field['name'] ) . '">';
+			echo '<select name="' . esc_attr( $field['name'] ) . '" class="select2">';
 
 			foreach( $list[$lang] as $value => $label ) {	
 

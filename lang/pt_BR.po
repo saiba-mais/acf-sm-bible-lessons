@@ -1,6 +1,6 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: acf-sm-bible-lesson\n"
+"Project-Id-Version: acf-sm-lesson\n"
 "POT-Creation-Date: 2019-04-01 15:36-0300\n"
 "PO-Revision-Date: 2019-04-01 15:37-0300\n"
 "Last-Translator: \n"
