@@ -52,7 +52,7 @@ class sm_acf_field_lessons extends acf_field {
 		*/
 		
 		$this->defaults = array(
-			'acf_sm_lesson__source'	=> 'https://saiba-mais.github.io/bible-lessons/catalog.json',
+			'acf_sm_lesson__source'	=> 'https://data.saibamais.org.br/catalog.json',
 			'acf_sm_lesson__lang'	=> 'pt'
 
 		);
@@ -112,7 +112,7 @@ class sm_acf_field_lessons extends acf_field {
 			'type'			=> 'select',
 			'name'			=> 'acf_sm_lesson__source',
 			'choices'		=> array(
-				'https://saiba-mais.github.io/bible-lessons/catalog.json'	=> 'Github - https://saiba-mais.github.io/bible-lessons/catalog.json',
+				'https://data.saibamais.org.br/catalog.json'	=> 'Github - https://data.saibamais.org.br/catalog.json',
 				'local'		=> 'Wordpress'
 			)
 		));
@@ -161,15 +161,22 @@ class sm_acf_field_lessons extends acf_field {
 		/*
 		*  Create a select input getting dynamic 'source' from the Github or localy Wordpress "lesson" post type.
 		*/
-		if( !empty( $list[$lang] ) ) {
+		$lessons_list = $list[$lang];
+		if( !empty( $lessons_list ) ) {
 
 			echo '<select name="' . esc_attr( $field['name'] ) . '" class="select2">';
 
-			foreach( $list[$lang] as $value => $label ) {	
+			for ($i=0; $i < count($lessons_list); $i++) { 
+				
+				$ID = $lessons_list[$i]['ID'];
+				$slug = $lessons_list[$i]['slug'];
+				$title = $lessons_list[$i]['title'];
 
-				$option_value = 'https://github.com/saiba-mais/bible-lessons/pt/' . $value . '.json';
-				$option_label = $label; 
-				if ( isset( $value ) ) {
+				// $option_value = 'https://data.saibamais.org.br/pt/' . $slug . '.json';
+				$option_value = $ID;
+				$option_label = $title; 
+
+				if ( isset( $field['value'] ) ) {
                     $selected = ( $option_value === $field['value'] ) ? " selected=\"selected\"" : false;
                 } else {
                     $selected = false;

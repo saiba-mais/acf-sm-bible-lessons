@@ -33,7 +33,7 @@ class sm_acf_field_lessons extends acf_field {
 		$this->defaults = array(
 			// add default here to merge into your field. 
 			// This makes life easy when creating the field options as you don't need to use any if( isset('') ) logic. eg:
-			'acf_sm_lesson__source'	=> 'https://saiba-mais.github.io/bible-lessons/catalog.json',
+			'acf_sm_lesson__source'	=> 'https://data.saibamais.org.br/catalog.json',
 			'acf_sm_lesson__lang'	=> 'pt'
 		);
 		
